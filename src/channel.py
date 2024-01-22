@@ -51,3 +51,72 @@ class Channel:
         """Создает и возвращает объект
          YouTube Data API сервиса."""
         return build('youtube', 'v3', developerKey=cls.api_key)
+
+    def __str__(self):
+        """Возвращает строковое представление
+        объекта Channel, включая заголовок и URL."""
+        return f"{self.title} ({self.url})"
+
+    def __add__(self, other):
+        """Определяет поведение оператора сложения
+        при использовании объектов Channel."""
+        if isinstance(other, Channel):
+            return int(self.subscriber_count) + int(other.subscriber_count)
+        else:
+            raise TypeError("Неподдерживаемый тип операнда для +: 'Channel' и {}".format(type(other)))
+
+    def __sub__(self, other):
+        """Определяет поведение оператора вычитания
+        при использовании объектов Channel."""
+        if isinstance(other, Channel):
+            return int(self.subscriber_count) - int(other.subscriber_count)
+        else:
+            raise TypeError("Неподдерживаемый тип операнда для -: 'Channel' и {}".format(type(other)))
+
+    def __lt__(self, other):
+        """ Определяет поведение оператора меньше (<)
+        при использовании объектов Channel."""
+        if isinstance(other, Channel):
+            return int(self.subscriber_count) < int(other.subscriber_count)
+        else:
+            raise TypeError("Неподдерживаемый тип операнда для <: 'Channel' и {}".format(type(other)))
+
+    def __le__(self, other):
+        """ Определяет поведение оператора меньше или равно (<=)
+        при использовании объектов Channel."""
+        if isinstance(other, Channel):
+            return int(self.subscriber_count) <= int(other.subscriber_count)
+        else:
+            raise TypeError("Неподдерживаемый тип операнда для <=: 'Channel' и {}".format(type(other)))
+
+    def __eq__(self, other):
+        """ Определяет поведение оператора равенства (==)
+        при использовании объектов Channel."""
+        if isinstance(other, Channel):
+            return int(self.subscriber_count) == int(other.subscriber_count)
+        else:
+            raise TypeError("Неподдерживаемый тип операнда для ==: 'Канал' и {}".format(type(other)))
+
+    def __ne__(self, other):
+        """ Определяет поведение оператора неравенства (!=)
+        при использовании объектов Channel."""
+        if isinstance(other, Channel):
+            return int(self.subscriber_count) != int(other.subscriber_count)
+        else:
+            raise TypeError("Неподдерживаемый тип операнда для !=: 'Channel' и {}".format(type(other)))
+
+    def __gt__(self, other):
+        """ Определяет поведение оператора больше (>)
+        при использовании объектов Channel."""
+        if isinstance(other, Channel):
+            return int(self.subscriber_count) > int(other.subscriber_count)
+        else:
+            raise TypeError("Неподдерживаемый тип операнда для >: 'Channel' и {}".format(type(other)))
+
+    def __ge__(self, other):
+        """ Определяет поведение оператора больше
+        или равно (>=) при использовании объектов Channel."""
+        if isinstance(other, Channel):
+            return int(self.subscriber_count) >= int(other.subscriber_count)
+        else:
+            raise TypeError("Неподдерживаемый тип операнда для >=: 'Channel' и {}".format(type(other)))
