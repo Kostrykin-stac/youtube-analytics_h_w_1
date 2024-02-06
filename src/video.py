@@ -11,21 +11,26 @@ class Video:
     """
 
     def __init__(self, video_id):
+        """Инициализация объекта YouTube для работы с API"""
         youtube = self.get_service()
         self.__video_id = video_id
         try:
+            """Получение информации о видео с использованием его идентификатора"""
             self._video_response = youtube.videos().list(part='snippet,statistics,contentDetails,topicDetails',
                                                          id=self.__video_id
                                                          ).execute()
 
             assert self._video_response['items'] != []
+            """Проверка наличия информации о видео"""
         except AssertionError:
+            """Если информация отсутствует, устанавливаем значения по умолчанию"""
             self.__title = None
             self.__url = None
             self.__view_count = None
             self.__like_count = None
             self.__comment_count = None
         else:
+            """Извлечение необходимых данных о видео"""
             self.__title = self._video_response['items'][0]['snippet']['title']
             self.__url = f'https://youtu.be/{self.__video_id}'
             self.__view_count = self._video_response['items'][0]['statistics']['viewCount']
